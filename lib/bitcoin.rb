@@ -428,7 +428,7 @@ module Bitcoin
     @network
   end
 
-  [:bitcoin, :namecoin, :litecoin, :freicoin].each do |n|
+  [:bitcoin, :namecoin, :litecoin, :freicoin, :lottocoin].each do |n|
     instance_eval "def #{n}?; network_project == :#{n}; end"
   end
 
@@ -666,9 +666,37 @@ module Bitcoin
       :known_nodes => ["178.32.31.41"],
       :checkpoints => {
         0 => "000000000062b72c5e2ceb45fbc8587e807c155b0da735e6483dfba2f0a9c770",
+      }
+    },
 
+    :lottocoin => {
+      :project => :lottocoin,
+      :magic_head => "\xfd\xc3\xb6\xf1", # ?
+      :address_version => "31",
+      :p2sh_version => "05", # no
+      :privkey_version => "b0", # no
+      :default_port => 16383,
+      :protocol_version => 60002,
+      :max_money => 19_000_000_000 * COIN,
+      :min_tx_fee => 1_000_000,
+      :coinbase_maturity => 100,
+      :retarget_interval => 2016, # ? src/bitcoinrpc.cpp
+      :retarget_time => 302400, # no 3.5 days #
+      :min_relay_tx_fee => 1_000_000,
+      :dns_seeds => [ # src/net.cpp
+      ],
+      :genesis_hash => "b5e96fe67d096f7cde17ecbf087e449b038fb35761d556e9571d6e8ab82c21d6",
+      :proof_of_work_limit => 0,
+      :alert_pubkeys => [],
+      :known_nodes => [],
+      :checkpoints => {
+             1 => "b906af5b944449626faf9fc478373ce932f36cd8066916806946b5a38461cfe0",
+         10000 => "a6e4605497a28503fb20bb728ba8fbbcb38cfce33e6bd31d51fb2547fb6ba5d7",
+         30000 => "ea421a7670439d56b20d3b490e2dabf17ed056189d04d30631562a58bb3957ec",
+         50000 => "8fe4c45e8d6ef6c045860127cb1c32d2ac6eda7cd88e22408b2b92093493ee0e",
+         61000 => "e189d60f37fe1a3c4e17de21868b6cd5c213433ee739be4212820d52b04c730c"
       }
     },
   }
-
 end
+
